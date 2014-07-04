@@ -45,6 +45,8 @@
 ;; path to the value of that variable as well as import the values of
 ;; VAR1 and VAR2.
 
+;;; Code:
+
 (defgroup env-var-import nil
   "Import shell environment variables"
   :version 1.0
@@ -90,3 +92,5 @@
 		(setenv var value)))))))
 
 (provide 'env-var-import)
+
+;;; env-var-import.el ends here
