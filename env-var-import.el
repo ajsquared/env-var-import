@@ -53,7 +53,7 @@
   :group 'external)
 
 (defcustom env-var-import-exec-path-var "PATH"
-  "The environment variable to use to set exec-path"
+  "The environment variable to use to set `exec-path'."
   :type 'string
   :group 'env-var-import)
 
@@ -67,9 +67,11 @@
 			    str))
 
 (defun shell-command-to-string-trimmed (command)
+  "Run COMMAND and return its output as a string trimmed of whitespace."
   (env-var-import-chomp (shell-command-to-string command)))
 
 (defun read-shell-env ()
+  "Read all shell environment variables using `printenv` and return their values as a hash table."
   (let ((printenv (split-string (shell-command-to-string-trimmed env-var-import-shell-command) "\n"))
 	(shell-env (make-hash-table :test 'equal)))
     (while printenv
@@ -81,6 +83,9 @@
     shell-env))
 
 (defun env-var-import (&optional other-vars)
+  "Import environment variables from the shell.
+`env-var-import-exec-path-var` is imported and used to set `exec-path`.
+Any variables specified in OTHER-VARS are imported as well."
   (let* ((shell-env (read-shell-env))
 	 (exec-val (gethash env-var-import-exec-path-var shell-env)))
     (setenv env-var-import-exec-path-var exec-val)
