@@ -2,11 +2,9 @@
 
 ## Introduction
 
-On OS X, an Emacs instance started from the graphical user
-interface will have a different environment than a shell in a
-terminal window, because OS X does not run a shell during the
-login.  This library works around that by copying environment
-variables from the shell.
+On OS X, a GUI Emacs instance will have a different environment from
+one started in the shell.  This library works around that by copying
+environment variables from the shell.
 
 ## Installation 
 
