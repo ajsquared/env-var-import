@@ -2,7 +2,7 @@
 
 ;; Copyright (c) 2014 Andrew Johnson <andrew@andrewjamesjohnson.com>
 
-;; Version: 1.0
+;; Version: 1.1
 ;; Keywords: shell, environment, env-var
 ;; Author: Andrew Johnson <andrew@andrewjamesjohnson.com>
 ;; Maintainer: Andrew Johnson <andrew@andrewjamesjohnson.com>
