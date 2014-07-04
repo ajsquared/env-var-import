@@ -11,11 +11,11 @@ variables from the shell.
 ## Installation 
 
 1. Place env-var-import.el somewhere on your Emacs load path.
-2. Add ```(require 'bar-cursor)``` to your .emacs
+2. Add ```(require `env-var-import)``` to your .emacs
 
 env-var-import.el is also available in Marmalade.  If you are using
-Emacs 24 or have package.el set up, simply run M-x package-install
-bar-cursor to install.  See the
+Emacs 24 or have package.el set up, simply run ```M-x package-install
+env-var-import``` to install.  See the
 [Marmalade page](http://marmalade-repo.org/) for setup instructions.
 
 ## Usage
