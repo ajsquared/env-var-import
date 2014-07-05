@@ -76,7 +76,6 @@
 	 (printf-str (mapconcat 'identity dollar-vars "\\000"))
 	 (values (split-string (shell-command-to-string (format env-var-import-shell-format-str printf-str)) "\0"))
 	 (shell-env (make-hash-table :test 'equal)))
-    (message (format env-var-import-shell-format-str printf-str))
     (while vars
       (puthash (car vars) (car values) shell-env)
       (setq vars (cdr vars)
@@ -89,7 +88,6 @@
 Any variables specified in OTHER-VARS are imported as well."
   (let* ((shell-env (read-shell-env (add-to-list 'other-vars env-var-import-exec-path-var)))
 	 (exec-val (gethash env-var-import-exec-path-var shell-env)))
-    ;(setenv env-var-import-exec-path-var exec-val)
     (setq exec-path (split-string exec-val path-separator))
     (if other-vars
 	(dolist (var other-vars)
