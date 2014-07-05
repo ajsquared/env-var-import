@@ -40,7 +40,7 @@
 ;; (env-var-import)
 ;; This usage will only import env-var-import-exec-path-var and set
 ;; exec path to the value of that variable.
-;; (env-var-import '("VAR1", "VAR2"))
+;; (env-var-import '("VAR1" "VAR2"))
 ;; This usage will import env-var-import-exec-path-var and set exec
 ;; path to the value of that variable as well as import the values of
 ;; VAR1 and VAR2.
