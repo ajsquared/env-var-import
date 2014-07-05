@@ -2,7 +2,7 @@
 
 ;; Copyright (c) 2014 Andrew Johnson <andrew@andrewjamesjohnson.com>
 
-;; Version: 2.0
+;; Version: 2.1
 ;; Keywords: shell, environment, env-var
 ;; Author: Andrew Johnson <andrew@andrewjamesjohnson.com>
 ;; Maintainer: Andrew Johnson <andrew@andrewjamesjohnson.com>
@@ -49,7 +49,7 @@
 
 (defgroup env-var-import nil
   "Import shell environment variables"
-  :version 2.0
+  :version 2.1
   :group 'external)
 
 (defcustom env-var-import-exec-path-var "PATH"
@@ -59,17 +59,7 @@
 
 (defvar env-var-import-shell-format-str "$SHELL -i -c 'printf \"%s\"'")
 
-(defun env-var-import-chomp (str)
-  "Chomp leading and tailing whitespace from STR."
-  (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
-				    (: (* (any " \t\n")) eos)))
-			    ""
-			    str))
-
-(defun shell-command-to-string-trimmed (command)
-  "Run COMMAND and return its output as a string trimmed of whitespace."
-  (env-var-import-chomp (shell-command-to-string command)))
-
+;;;###autoload
 (defun read-shell-env (vars)
   "Read all environment variables specified in VARS and return their values in a hash table."
   (let* ((dollar-vars (mapcar (lambda (var) (concat "$" var)) vars))
@@ -82,6 +72,7 @@
 	    values (cdr values)))
     shell-env))
 
+;;;###autoload
 (defun env-var-import (&optional other-vars)
   "Import environment variables from the shell.
 `env-var-import-exec-path-var` is imported and used to set `exec-path`.
