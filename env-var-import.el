@@ -6,7 +6,7 @@
 ;; Keywords: shell, environment, env-var
 ;; Author: Andrew Johnson <andrew@andrewjamesjohnson.com>
 ;; Maintainer: Andrew Johnson <andrew@andrewjamesjohnson.com>
-;; URL: https://github.com/ajsquared/color-theme-x
+;; URL: https://github.com/ajsquared/env-var-import
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
