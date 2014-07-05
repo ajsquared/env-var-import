@@ -2,7 +2,7 @@
 
 ;; Copyright (c) 2014 Andrew Johnson <andrew@andrewjamesjohnson.com>
 
-;; Version: 1.1
+;; Version: 2.0
 ;; Keywords: shell, environment, env-var
 ;; Author: Andrew Johnson <andrew@andrewjamesjohnson.com>
 ;; Maintainer: Andrew Johnson <andrew@andrewjamesjohnson.com>
@@ -49,7 +49,7 @@
 
 (defgroup env-var-import nil
   "Import shell environment variables"
-  :version 1.0
+  :version 2.0
   :group 'external)
 
 (defcustom env-var-import-exec-path-var "PATH"
@@ -57,7 +57,7 @@
   :type 'string
   :group 'env-var-import)
 
-(defvar env-var-import-shell-command "$SHELL -i -c 'printenv'")
+(defvar env-var-import-shell-format-str "$SHELL -i -c 'printf \"%s\"'")
 
 (defun env-var-import-chomp (str)
   "Chomp leading and tailing whitespace from STR."
@@ -70,25 +70,26 @@
   "Run COMMAND and return its output as a string trimmed of whitespace."
   (env-var-import-chomp (shell-command-to-string command)))
 
-(defun read-shell-env ()
-  "Read all shell environment variables using `printenv` and return their values as a hash table."
-  (let ((printenv (split-string (shell-command-to-string-trimmed env-var-import-shell-command) "\n"))
-	(shell-env (make-hash-table :test 'equal)))
-    (while printenv
-      (let* ((split (split-string (car printenv) "="))
-	     (var (car split))
-	     (value (car (last split))))
-	(puthash var value shell-env))
-      (setq printenv (cdr printenv)))
+(defun read-shell-env (vars)
+  "Read all environment variables specified in VARS and return their values in a hash table."
+  (let* ((dollar-vars (mapcar (lambda (var) (concat "$" var)) vars))
+	 (printf-str (mapconcat 'identity dollar-vars "\\000"))
+	 (values (split-string (shell-command-to-string (format env-var-import-shell-format-str printf-str)) "\0"))
+	 (shell-env (make-hash-table :test 'equal)))
+    (message (format env-var-import-shell-format-str printf-str))
+    (while vars
+      (puthash (car vars) (car values) shell-env)
+      (setq vars (cdr vars)
+	    values (cdr values)))
     shell-env))
 
 (defun env-var-import (&optional other-vars)
   "Import environment variables from the shell.
 `env-var-import-exec-path-var` is imported and used to set `exec-path`.
 Any variables specified in OTHER-VARS are imported as well."
-  (let* ((shell-env (read-shell-env))
+  (let* ((shell-env (read-shell-env (add-to-list 'other-vars env-var-import-exec-path-var)))
 	 (exec-val (gethash env-var-import-exec-path-var shell-env)))
-    (setenv env-var-import-exec-path-var exec-val)
+    ;(setenv env-var-import-exec-path-var exec-val)
     (setq exec-path (split-string exec-val path-separator))
     (if other-vars
 	(dolist (var other-vars)
