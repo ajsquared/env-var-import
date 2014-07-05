@@ -27,7 +27,7 @@ only import the value of the environment variable defined in
 value.  ```env-var-import-exec-path-var``` defaults to ```PATH``` but
 is customizable.
 
-It can also be called like ```(env-var-import '("VAR1", "VAR2"))```.
+It can also be called like ```(env-var-import '("VAR1" "VAR2"))```.
 In this mode it will still import the value of the environment
 variable defined in ```env-var-import-exec-path-var``` and set
 ```exec-path``` to that value.  However, it will also import the
