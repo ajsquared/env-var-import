@@ -1,6 +1,6 @@
 ;;; env-var-import.el --- Import shell environment variables in GUI Emacs
 
-;; Copyright (c) 2014-2015 Andrew Johnson <andrew@andrewjamesjohnson.com>
+;; Copyright (c) 2014-2016 Andrew Johnson <andrew@andrewjamesjohnson.com>
 
 ;; Version: 2.1
 ;; Keywords: shell, environment, env-var
