@@ -3,7 +3,7 @@
 ;; Copyright (c) 2014-2016 Andrew Johnson <andrew@andrewjamesjohnson.com>
 
 ;; Version: 2.1
-;; Keywords: shell, environment, env-var
+;; Keywords: unix
 ;; Author: Andrew Johnson <andrew@andrewjamesjohnson.com>
 ;; Maintainer: Andrew Johnson <andrew@andrewjamesjohnson.com>
 ;; URL: https://github.com/ajsquared/env-var-import
